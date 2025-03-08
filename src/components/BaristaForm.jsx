@@ -25,6 +25,10 @@ const BaristaForm = () => {
         getNextDrink();
     };
 
+    const onCheckAnswer = (e) => {
+        e.preventDefault();
+    };
+
     const ingredients = {
         temperature: ["hot", "lukewarm", "cold"],
         syrup: ["mocha", "vanilla", "toffee", "maple", "caramel", "other", "none"],
@@ -35,9 +39,15 @@ const BaristaForm = () => {
     return (
         <div>
             <h2>Hi, I'd like to order a:</h2>
-            <form>
+            <div className="drink-container">
+                <h2 className="mini-header">{currentDrink}</h2>
+                <button type="button" className="button new-drink-button" onClick={onNewDrink}>
+                    🔄
+                </button>
+            </div>
+            <form onSubmit={onCheckAnswer} className="container">
                 {Object.keys(ingredients).map((category) => (
-                    <div key={category}>
+                    <div key={category} className="mini-container">
                         <h3>{category}</h3>
                         <div className="answer-space">{inputs[category]}</div>
                         <RecipeChoices
@@ -55,9 +65,6 @@ const BaristaForm = () => {
                 ))}
                 <button type="submit" className="button submit">
                     Check Answer
-                </button>
-                <button type="button" className="button new-drink-button">
-                    New Drink
                 </button>
             </form>
         </div>
